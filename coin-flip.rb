@@ -46,8 +46,8 @@ for iter in 1..n
   # p v_min / iter
 end
 
-p "vmin: #{v_min / n}"
-p "vmin: #{v_min / n}"
+p "vfirst: #{v_first / n}"
+p "vrand: #{v_rand / n}"
 p "vmin: #{v_min / n}"
 
 
