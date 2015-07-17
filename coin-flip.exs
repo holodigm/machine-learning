@@ -12,45 +12,38 @@
 # Run the experiment 100,000 times in order to get a full distribution
 # of ν1, νrand, and νmin (note that crand and cmin will change from run to run).
 
-
-defmodule CoinFlip do
-  1..100000 |> Enum.map fn(x) -> x |> IO.puts end
-
-end
-  n = 100_000
-
-  v_first = 0
-  v_min = 0
-  v_rand = 0
-  first = 0
-  rand = 0
-
-  (1..n).each do
-    rand_coin = Random.rand(1000)
-    min = 1.0
-
-    (1..1000).each do |coin|
-    i = 0
-    (1..10).each do |flip|
-    if rand.round == 0
-    flip = 1
-  else
-    flip = 0
+defmodule Coin do
+  def iterations do
+    1000
   end
-  i += flip
-end
-first = i / 10 if coin == 1
-rand = i / 10 if coin == rand_coin
-min = i / 10 if (i / 10) < min
-end
-v_first += first
-v_rand += rand
-v_min += min
-print '.'
-  # p v_min / iter
-end
 
-p "vfirst: #{v_first / n}"
-p "vrand: #{v_rand / n}"
-p "vmin: #{v_min / n}"
+  def coins do
+    1000
+  end
+
+  def flips do
+    10
+  end
+
+  def flip(coins, rand_coin) do
+    Enum.map(1..coins, fn (coin) ->
+      call = 0.0
+      Enum.map(1..flips, fn (flip) ->
+        if :random.uniform > 0.5 do
+          heads = 1
+        else
+          heads = 0
+        end
+        call = call + heads
+      end)
+    end)
+  end
+
+  def iterate do
+    Enum.map(1..iterations, fn (iteration) ->
+      rand_coin = :random.uniform(coins)
+      IO.puts "."
+      flip(coins, rand_coin)
+    end)
+  end
 end
